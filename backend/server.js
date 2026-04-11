@@ -1,16 +1,19 @@
 import express from 'express';
-import mongoose from 'mongoose';    
 import dotenv from 'dotenv';
 import authRoute from './routes/auth.route.js';
 import { connectDB } from './config/db.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
 const app = express(); 
+const PORT = process.env.PORT || 3000;
 
+app.use(express.json()); // to parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // to parse URL-encoded request bodies
+app.use(cookieParser()); // to parse cookies
 
 app.use("/api/auth", authRoute)
-const PORT = process.env.PORT || 3000;
  
 app.get("/", (req, res) => {
     res.send("Hello World");
