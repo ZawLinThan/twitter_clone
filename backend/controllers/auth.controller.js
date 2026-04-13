@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { generateTokenAndSetCookie } from "../lib/util/generateToken.js";
+import { getLikedPosts } from "./post.controller.js";
 
 export const login = async (req, res) => {
     try {
@@ -78,6 +79,7 @@ export const signup = async (req, res) => {
                 coverImage: newUser.coverImage,
                 bio: newUser.bio,
                 link: newUser.link,
+                likedPosts: []
             });
         } else {
             res.status(500).json({ message: "Failed to create user" }); 
